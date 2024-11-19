@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>netd metadata!</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <!-- Gerekli kütüphaneler -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Sol Sidebar (Nasıl Kullanılır) -->
+    <div id="left-sidebar" class="sidebar">
+        <div class="sidebar-content">
+            <h2>Nasıl Kullanılır?</h2>
+            <ol>
+                <li><strong><u>Backstage</u></strong> sayfanızı açın ve metadata oluşturmak istediğiniz içeriği seçin.</li>
+                <li>Tüm sayfayı seçmek için <strong><u>Ctrl + A</u></strong> tuşlarına basın ve ardından <strong><u>Ctrl + C</u></strong> ile kopyalayın.</li>
+                <li>Bu sayfaya geri dönün ve aşağıdaki büyük butona tıklayın.</li>
+                <li>Excel dosyanız otomatik olarak indirilmeye başlayacaktır.</li>
+            </ol>
+            <h3>Dikkat Edilmesi Gerekenler:</h3>
+            <ul>
+                <li>Uygulamanın panonuza (kopyaladığınız metne) erişebilmesi için tarayıcınızdan <em>izin vermeniz gerekmektedir</em>. Bu site hiçbir veriyi depolamaz veya işlemez.</li>
+                <li>Eğer <strong>ISRC</strong> veya <strong>UPC</strong> bilgileri eksikse uygulama çalışmayabilir. Metadata oluşturmak için içeriğinizin <strong>onaylanmış</strong> olmasına dikkat edin.</li>
+                <li>Oluşturulan metadata dosyası temel özellikleri içerir. Eklemek istediğiniz ek bilgileri ekranın sağında bulunan "+" ikonuna basarak açılacak form alanlarına ekleyebilirsiniz ya da oluşturduğunuz dosyayı elle güncelleyerek ekleyebilirsiniz.</li>
+                <li>Görüş ve önerileriniz için e-posta</a> ile iletişime geçebilirsiniz.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Sağ Sidebar (Form) -->
+    <div id="right-sidebar" class="sidebar">
+        <div class="sidebar-content">
+            <!-- Form öğeleri -->
+            <h2>Ek Bilgiler...</h2>
+            <form id="metadata-form">
+                <input type="radio" id="single" name="turu" value="SINGLE">
+                <label for="single">SINGLE</label>
+                <input type="radio" id="album" name="turu" value="ALBUM">
+                <label for="album">ALBUM</label><br><hr>
+
+                <!-- Şarkı Numarası Seçici -->
+                <div id="track-number-container" style="display:none;">
+                    <label><i>Bu bilgiler albümün kaçıncı şarkısına ait?</i></label><br><br>
+                    <button type="button" id="decrease-track">-</button>
+                    <span id="track-number">1. şarkı</span>
+                    <button type="button" id="increase-track">+</button>
+                    <br><hr>
+                </div>
+
+                <input type="text" id="duzenleme" name="duzenleme" placeholder="Aranjör adını bu alana yazabilirsiniz..."><br><hr>
+                <input type="text" id="klip-yonetmeni" name="klip-yonetmeni" placeholder="Klip yönetmeni adını bu alana yazabilirsiniz..."><br><hr>
+                <textarea id="aciklama" name="aciklama" rows="4" cols="30" placeholder="Ek künye içeriklerini bu alana yazabilirsiniz.
+---Örnek---
+Prodüktör: Lorem Ipsum"></textarea><br><hr>
+                <label for="yayin-tarihi">Yayın Tarihi:</label>
+                <input type="datetime-local" id="yayin-tarihi" name="yayin-tarihi" step="900"><br><hr>
+                <textarea id="sarki-sozleri" name="sarki-sozleri" rows="4" cols="30" placeholder="Şarkı sözlerini buraya giriniz"></textarea><br><hr>
+                <label>Thumbnail Timecode</label><br>
+                <div class="time-inputs">
+                    <input type="number" id="ekran-dakika" name="ekran-dakika" min="0" placeholder="Dakika">
+                    <input type="number" id="ekran-saniye" name="ekran-saniye" min="0" max="59" placeholder="Saniye">
+                    <input type="number" id="ekran-milisaniye" name="ekran-milisaniye" min="0" max="999" placeholder="Milisaniye">
+                </div>
+                <p id="ekran-goruntusu-display"></p><hr>
+            </form>
+        </div>
+    </div>
+
+    <!-- Ana İçerik -->
+    <div class="main-content">
+        <!-- Nasıl Kullanılır Butonu -->
+        <div class="button-wrapper">
+            <button class="toggle-btn">
+                &#128712; <!-- Info ikonu -->
+            </button>
+        </div>
+
+        <!-- Form Butonu -->
+        <div class="button-wrapper-right">
+            <button class="toggle-btn-right">
+                &#43; <!-- Plus ikonu -->
+            </button>
+        </div>
+
+        <!-- Butonları ve mesajı merkeze alıyoruz -->
+        <div class="button-container">
+            <button id="generate">netd metadata!</button>
+        </div>
+
+        <!-- Hata Mesajı Alanı -->
+        <div id="message" class="message">
+            <span id="message-text"></span>
+            <button id="close-message" class="close-message">&times;</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; <span id="currentYear"></span> Sezer Çağlar </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript dosyaları -->
+    <script src="script.js"></script>
+</body>
+</html>

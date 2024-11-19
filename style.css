@@ -1,0 +1,300 @@
+﻿/* style.css */
+
+/* Genel stil ayarları */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #e0e0e0 25%, #f8f8f8 75%);
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden; /* Yatay kaydırmayı önlemek için */
+}
+
+/* Sidebar Genel Ayarları */
+.sidebar {
+    position: fixed;
+    width: 300px;
+    height: calc(100% - 80px); /* Footer'ın üstünde bitecek şekilde ayarlandı */
+    background: #f4f4f4;
+    top: 0;
+    transition: all 0.3s ease;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+/* Sol Sidebar */
+#left-sidebar {
+    left: -300px;
+}
+
+#left-sidebar.active {
+    left: 0;
+}
+
+/* Sağ Sidebar */
+#right-sidebar {
+    right: -300px;
+}
+
+#right-sidebar.active {
+    right: 0;
+}
+
+/* Sidebar İçeriği */
+.sidebar .sidebar-content {
+    padding: 20px 30px 60px 20px; /* Sağ taraftan ekstra boşluk eklendi */
+}
+
+/* Sidebar Başlıkları */
+.sidebar h2, .sidebar h3 {
+    color: #333;
+}
+
+/* Form Stil Ayarları */
+#metadata-form label {
+    font-weight: bold;
+}
+
+#metadata-form input[type="text"],
+#metadata-form input[type="datetime-local"],
+#metadata-form input[type="number"],
+#metadata-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+}
+
+#metadata-form input[type="radio"] {
+    margin-right: 5px;
+}
+
+#metadata-form textarea {
+    resize: vertical;
+}
+
+.time-inputs {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.time-inputs input {
+    width: calc(33.33% - 6.66px);
+}
+
+/* Timecode Birimlerini Renklendirme */
+.timecode .unit.dakika {
+    color: red;
+}
+
+.timecode .unit.saniye {
+    color: green;
+}
+
+.timecode .unit.milisaniye {
+    color: blue;
+}
+
+/* Ana İçerik */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding-bottom: 100px; /* Footer'a yer açmak için */
+    transition: all 0.3s ease;
+}
+
+/* Sidebar Açıldığında Ana İçeriği Kaydırma */
+#left-sidebar.active ~ .main-content {
+    transform: translateX(300px);
+}
+
+#right-sidebar.active ~ .main-content {
+    transform: translateX(-300px);
+}
+
+/* Nasıl Kullanılır Butonu */
+.button-wrapper {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.toggle-btn {
+    background-color: #217346;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    font-size: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.toggle-btn:hover {
+    background-color: #1e5e37;
+}
+
+/* Form Butonu */
+.button-wrapper-right {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.toggle-btn-right {
+    background-color: #217346;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    font-size: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.toggle-btn-right:hover {
+    background-color: #1e5e37;
+}
+
+/* Büyük Buton Stil Ayarları */
+.button-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#generate {
+    width: 225px;
+    height: 225px;
+    border-radius: 50%;
+    font-size: 24px;
+    background-color: #217346;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+#generate:hover {
+    background-color: #1e5e37;
+    transform: scale(1.05);
+}
+
+#generate:active {
+    transform: scale(0.95);
+}
+
+/* Hata Mesajı Alanı */
+.message {
+    display: none;
+    max-width: 500px;
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    position: relative;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.message.warning {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.close-message {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: inherit;
+}
+
+/* Footer stilleri */
+footer {
+    background-color: #343a40;
+    color: #fff;
+    padding: 20px 0;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+}
+
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.footer-content p {
+    margin: 0;
+    font-size: 16px;
+}
+
+/* Mobil uyumluluk */
+@media (max-width: 768px) {
+    /* Sidebar genişliklerini ayarla */
+    .sidebar {
+        width: 250px;
+    }
+
+    #left-sidebar {
+        left: -250px;
+    }
+
+    #left-sidebar.active {
+        left: 0;
+    }
+
+    #right-sidebar {
+        right: -250px;
+    }
+
+    #right-sidebar.active {
+        right: 0;
+    }
+
+    /* Ana içeriğin kaydırılmasını ayarla */
+    #left-sidebar.active ~ .main-content {
+        transform: translateX(250px);
+    }
+
+    #right-sidebar.active ~ .main-content {
+        transform: translateX(-250px);
+    }
+
+    /* Buton konumlarını ayarla */
+    .button-wrapper {
+        top: 15px;
+        left: 15px;
+    }
+
+    .button-wrapper-right {
+        top: 15px;
+        right: 15px;
+    }
+
+    .time-inputs {
+        flex-direction: column;
+    }
+
+    .time-inputs input {
+        width: 100%;
+    }
+}
