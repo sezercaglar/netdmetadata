@@ -348,7 +348,7 @@ async function generateExcel() {
         // Excel dosyasını indir
         const wbout = XLSX.write(wb, { bookType: "xlsx", type: "array" });
         const blob = new Blob([wbout], { type: "application/octet-stream" });
-        saveAs(blob, "metadata.xlsx");
+        saveAs(blob, "netd-bs-metadata.xlsx");
     } catch (err) {
         console.error("Error:", err);
         showMessage("Bir hata oluştu: " + err.message, "error");
